@@ -239,6 +239,7 @@ public class FragmentProxy extends BaseProxy {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
+        printLog("liumy=== "+mFragment+" isVisibleToUser:"+isVisibleToUser);
         invokeOnLazyLoadViewCreated();
     }
 
@@ -400,6 +401,7 @@ public class FragmentProxy extends BaseProxy {
                       @Nullable Bundle savedInstanceState, @Nullable View view) {
         this.mHasInitView = true;
         initLazyLoadStatus();
+        printLog("liumy=== onCreateView:" + mFragment);
         return super.onCreateView(inflater, container, savedInstanceState, view);
     }
 
@@ -416,6 +418,7 @@ public class FragmentProxy extends BaseProxy {
         super.onViewCreated(view, savedInstanceState);
         mHasInitView = true;
         mSavedFragmentState = savedInstanceState;
+        printLog("liumy=== onViewCreated:" + mFragment);
         invokeOnLazyLoadViewCreated();
     }
 
@@ -424,6 +427,8 @@ public class FragmentProxy extends BaseProxy {
      * 调用懒加载创建view函数
      */
     private void invokeOnLazyLoadViewCreated() {
+        printLog("liumy=== invokeOnLazyLoadViewCreated:" + mFragment);
+        printLog("liumy=== getUserVisibleHint:" + mFragment.getUserVisibleHint());
         if (EnumLoadModel.LAZY_LOAD != mLoadModel) {
             return;
         }

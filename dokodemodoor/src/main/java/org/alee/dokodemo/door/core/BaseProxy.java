@@ -572,6 +572,11 @@ abstract class BaseProxy implements IProxy {
     }
 
     @Override
+    public void replaceFragment(@NonNull Fragment fragment) {
+        this.replaceFragment(fragment, DokodemoDoor.getNodeProxy(getHost()).getContainerViewId());
+    }
+
+    @Override
     public void close(@NonNull Fragment fragment) {
         String fragmentTag = DokodemoDoor.getNodeProxy(fragment).getFragmentTag();
         if (!mFragmentStackManager.remove(fragmentTag)) {

@@ -3,9 +3,12 @@ package org.alee.dokodemo.door.aop;
 import android.os.Bundle;
 
 import org.alee.dokodemo.door.core.DokodemoDoor;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import java.lang.reflect.Method;
@@ -137,25 +140,22 @@ public class ActivityWeaver extends BaseWeaver {
         return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_RESUME_FRAGMENTS)
-    public Object onResumeFragmentsProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @After(METHOD_NAME_ON_RESUME_FRAGMENTS)
+    public void onResumeFragmentsProcess(JoinPoint joinPoint) throws Throwable {
         Method onResumeFragments = getLauncherMethod(RESUME_FRAGMENTS, Object.class);
         onResumeFragments.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_PAUSE)
-    public Object onPauseProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before(METHOD_NAME_ON_PAUSE)
+    public void onPauseProcess(JoinPoint joinPoint) throws Throwable {
         Method onPause = getLauncherMethod(PAUSE, Object.class);
         onPause.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_RESUME)
-    public Object onResumeProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @After(METHOD_NAME_ON_RESUME)
+    public void onResumeProcess(JoinPoint joinPoint) throws Throwable {
         Method onPause = getLauncherMethod(RESUME, Object.class);
         onPause.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
     @Around(METHOD_NAME_ON_SAVE_INSTANCE_STATE)
@@ -165,11 +165,10 @@ public class ActivityWeaver extends BaseWeaver {
         return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_DESTROY)
-    public Object onDestroyProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before(METHOD_NAME_ON_DESTROY)
+    public void onDestroyProcess(JoinPoint joinPoint) throws Throwable {
         Method onDestroy = getLauncherMethod(DESTROY, Object.class);
         onDestroy.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
     @Around(METHOD_NAME_ON_BACK_PRESSED)
