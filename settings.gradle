@@ -1,0 +1,2 @@
+include ':app', ':dokodemodoor', ':annotation-v7', ':annotation-x'
+rootProject.name='DokodemoDoorDemo'
