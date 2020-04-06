@@ -436,7 +436,7 @@ abstract class BaseProxy implements IProxy {
     public void startFragment(@NonNull Fragment fragment) {
         String tag = DokodemoDoor.getNodeProxy(fragment).getFragmentTag();
         if (!mFragmentStackManager.push(tag, mContainerViewId)) {
-//            throw new AlreadyExistException(tag);
+            //            throw new AlreadyExistException(tag);
             return;
         }
         if (0 >= getContainerViewId()) {
@@ -572,6 +572,11 @@ abstract class BaseProxy implements IProxy {
     }
 
     @Override
+    public void replaceFragment(@NonNull Fragment fragment) {
+        this.replaceFragment(fragment, DokodemoDoor.getNodeProxy(getHost()).getContainerViewId());
+    }
+
+    @Override
     public void close(@NonNull Fragment fragment) {
         String fragmentTag = DokodemoDoor.getNodeProxy(fragment).getFragmentTag();
         if (!mFragmentStackManager.remove(fragmentTag)) {
@@ -610,7 +615,7 @@ abstract class BaseProxy implements IProxy {
     @Override
     public void printStack() {
         StringBuilder sb = new StringBuilder("printStack \r\n");
-        sb.append(getFragmentTagStack());
+        sb.append(TextUtils.isEmpty(getFragmentTag()) ? getHost().toString() : getFragmentTag());
         Stack<String> stack = mFragmentStackManager.getFragmentTagStack();
         printStack(sb, this, stack, 1);
         printLog(sb.toString());

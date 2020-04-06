@@ -30,4 +30,6 @@ dependencies {
     implementation rootProject.ext.other["util"]
     implementation project(path: ':annotation-v7')
     implementation project(path: ':dokodemodoor')
+    implementation rootProject.ext.view["recyclerview"]
+    implementation rootProject.ext.supportLib["design"]
 }

@@ -29,7 +29,6 @@ final class FragmentStackManager implements Cloneable, Serializable {
 
     /**
      * key {@link Fragment} tag
-     * <p>
      * value 宿主的containerViewId
      */
     private final HashMap<String, Integer> mFragmentContainerMap;

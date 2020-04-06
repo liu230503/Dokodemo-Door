@@ -12,6 +12,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import java.lang.reflect.Method;
@@ -159,11 +160,10 @@ public class FragmentWeaver extends BaseWeaver {
         return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_ATTACH)
-    public Object onAttachProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @After(METHOD_NAME_ON_ATTACH)
+    public void onAttachProcess(JoinPoint joinPoint) throws Throwable {
         Method onAttach = getLauncherMethod(ATTACH, Object.class, Context.class);
         onAttach.invoke(getLauncherInstance(), joinPoint.getTarget(), joinPoint.getArgs()[0]);
-        return joinPoint.proceed();
     }
 
     @Around(METHOD_NAME_ON_CREATE)
@@ -190,11 +190,10 @@ public class FragmentWeaver extends BaseWeaver {
         onCreate.invoke(getLauncherInstance(), joinPoint.getTarget(), args[0], args[1]);
     }
 
-    @Around(METHOD_NAME_ON_RESUME)
-    public Object onResumeProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @After(METHOD_NAME_ON_RESUME)
+    public void onResumeProcess(JoinPoint joinPoint) throws Throwable {
         Method onPause = getLauncherMethod(RESUME, Object.class);
         onPause.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
     @Around(METHOD_NAME_ON_SAVE_INSTANCE_STATE)
@@ -204,24 +203,21 @@ public class FragmentWeaver extends BaseWeaver {
         return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_DESTROY)
-    public Object onDestroyProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before(METHOD_NAME_ON_DESTROY)
+    public void onDestroyProcess(JoinPoint joinPoint) throws Throwable {
         Method onDestroy = getLauncherMethod(DESTROY, Object.class);
         onDestroy.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_ON_DETACH)
-    public Object onDetachProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before(METHOD_NAME_ON_DETACH)
+    public void onDetachProcess(JoinPoint joinPoint) throws Throwable {
         Method onDestroy = getLauncherMethod(DETACH, Object.class);
         onDestroy.invoke(getLauncherInstance(), joinPoint.getTarget());
-        return joinPoint.proceed();
     }
 
-    @Around(METHOD_NAME_SET_USER_VISIBLE_HINT)
-    public Object setUserVisibleHintProcess(ProceedingJoinPoint joinPoint) throws Throwable {
+    @After(METHOD_NAME_SET_USER_VISIBLE_HINT)
+    public void setUserVisibleHintProcess(JoinPoint joinPoint) throws Throwable {
         Method onDestroy = getLauncherMethod(SET_USER_VISIBLE_HINT, Object.class, boolean.class);
         onDestroy.invoke(getLauncherInstance(), joinPoint.getTarget(), joinPoint.getArgs()[0]);
-        return joinPoint.proceed();
     }
 }

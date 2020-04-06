@@ -133,15 +133,23 @@ public interface IProxy {
 
     /**
      * 显示一个{@link Fragment} 并移除该{@link Fragment}所属宿主所使用的的布局中所包含其他的{@link Fragment}
-     * 调用此方法前需要先add该{@link Fragment}
      * 如果该{@link Fragment} 已经显示了，则什么都不会做
      * <p>
      * 该方法添加的{@link Fragment}不会被压入堆栈。如果调用方法{@link #onBackPressed()}，则该片段没有任何操作。
      *
      * @param fragment        要显示的{@link Fragment}
-     * @param containerViewId 宿主加载{@link Fragment} 的布局id 如果<=0 则会从从宿主向上寻找新的宿主
+     * @param containerViewId 宿主加载{@link Fragment} 的布局id
      */
     void replaceFragment(@NonNull Fragment fragment, @IdRes int containerViewId);
+
+    /**
+     * 显示一个{@link Fragment} 并移除该{@link Fragment}所属宿主所使用的的布局中所包含其他的{@link Fragment}
+     * 如果该{@link Fragment} 已经显示了，则什么都不会做
+     * 该方法添加的{@link Fragment}不会被压入堆栈。如果调用方法{@link #onBackPressed()}，则该片段没有任何操作。
+     *
+     * @param fragment 要显示的{@link Fragment}
+     */
+    void replaceFragment(@NonNull Fragment fragment);
 
     /**
      * 返回当前节点是否已经走过onResume生命周期
