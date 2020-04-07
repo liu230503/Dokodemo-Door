@@ -145,7 +145,7 @@ public interface IProxy {
     /**
      * 显示一个{@link Fragment} 并移除该{@link Fragment}所属宿主所使用的的布局中所包含其他的{@link Fragment}
      * 如果该{@link Fragment} 已经显示了，则什么都不会做
-     * 该方法添加的{@link Fragment}不会被压入堆栈。如果调用方法{@link #onBackPressed()}，则该片段没有任何操作。
+     * 该方法添加的{@link Fragment}不会被压入堆栈。如果调用方法{@link #onBackPressed()}，则该 {@link Fragment}没有任何操作。
      *
      * @param fragment 要显示的{@link Fragment}
      */
@@ -217,7 +217,7 @@ public interface IProxy {
     /**
      * 返回一个结果给调用此{@link Fragment}
      *
-     * @param resultCode 请选择{@link DokodemoDoor#RESULT_OK} 或 {@link DokodemoDoor#RESULT_CANCELED}
+     * @param resultCode 请选择{@link DokodemoDoor#FRAGMENT_RESULT_OK} 或 {@link DokodemoDoor#FRAGMENT_RESULT_CANCELED}
      * @param bundle     要返回的数据
      */
     void setResult(int resultCode, Bundle bundle);

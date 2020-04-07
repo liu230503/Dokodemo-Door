@@ -31,11 +31,11 @@ public final class DokodemoDoor {
     /**
      * 用于{@link IProxy#setResult(int, Bundle)}成功
      */
-    public static final int RESULT_OK = 0x1010;
+    public static final int FRAGMENT_RESULT_OK = 0x1010;
     /**
      * 用于{@link IProxy#setResult(int, Bundle)} 取消
      */
-    public static final int RESULT_CANCELED = 0x1020;
+    public static final int FRAGMENT_RESULT_CANCELED = 0x1020;
     /**
      * {@link ILogger}
      */
